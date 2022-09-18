@@ -1,4 +1,5 @@
 import { useRouteError } from 'react-router-dom';
+import "./Error.css";
 
 const ErrorPage = () => {
   const error = useRouteError();
@@ -6,10 +7,10 @@ const ErrorPage = () => {
 
   return (
     <section id="error">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+      <h1>Duarr Error!</h1>
+      <p>Maaf, Halaman Tidak Ditemukan.</p>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i>{error.statusText || error.status}</i>
       </p>
     </section>
   );

@@ -10,7 +10,7 @@ const Request = () => {
         const subject = e.target.subject.value;
         const description = e.target.description.value;
 
-        axios.post('http://192.168.103.215:8000/api/request', {from, subject, description})
+        axios.post('https://ex-scash.herokuapp.com/api/request', {from, subject, description})
         .then(res => e.target.reset()).catch(err => console.log(err))
     }
 

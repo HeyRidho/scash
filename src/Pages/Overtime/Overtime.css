@@ -103,3 +103,45 @@ input[type="date"] {
 input[type="date"]:focus {
     outline: none;
 }
+
+.popup-container {
+    position: absolute;
+    text-align: center;
+    top: 35%;
+    color: whitesmoke;
+    padding: 10px 40px;
+    left: 0;
+    right: 0;
+}
+
+.popup-container::before {
+    content: ".";
+    position: absolute;
+    width: 200vh;
+    left: 0;
+    top: -200%;
+    height: 200vh;
+    background-color: rgba(0,0,0,.8);
+    transition: .5s;
+}
+
+.popup {
+    position: relative;
+    padding: 20px 40px;
+    background-color: var(--color);
+    border-radius: var(--border-radius);
+    z-index: 10;
+    transition: .5;
+}
+
+.popup-btn {
+    position: relative;
+    right: -90px;
+    font-size: 11pt;
+    margin-top: 20px;
+    padding: 4px;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: white;
+    font-family: var(--font-family);
+}

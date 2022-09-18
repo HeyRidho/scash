@@ -25,8 +25,11 @@ const DinasLuar = () => {
         const job = e.target.job.value;
         const date = e.target.date.value;
 
-        axios.post('http://192.168.103.215:8000/api/dinasluar', {name, hour, job, date})
-        .then(res => e.target.reset()).catch(err => console.log(err))
+        axios.post('https://ex-scash.herokuapp.com/api/dinasluar', {name, hour, job, date})
+        .then(res => {
+            alert('Terimakasih Sudah Mengisi')
+            e.target.reset()
+        }).catch(err => console.log(err))
     }
 
 

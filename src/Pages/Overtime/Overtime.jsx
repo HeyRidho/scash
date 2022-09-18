@@ -1,8 +1,11 @@
 import { member } from "./member";
+import { useState } from "react";
 import axios from "axios";
 import "./Overtime.css";
 
 const Overtime = () => {
+    const [sended, setSended] = useState(true);
+    
     let dated = new Date()
     let day = dated.getDate();
     let month = dated.getMonth()+1;
@@ -26,13 +29,25 @@ const Overtime = () => {
         const job = e.target.job.value;
         const date = e.target.date.value;
 
-        axios.post('http://192.168.103.215:8000/api/overtime', {name, hour, job, date})
-        .then(res => e.target.reset()).catch(err => console.log(err))
+        axios.post('https://ex-scash.herokuapp.com/api/overtime', {name, hour, job, date})
+        .then(res => {
+            setSended(true)
+            e.target.reset()
+        }).catch(err => console.log(err))
     }
 
 
     return (
         <section id="overtime">
+            { sended &&
+                <div className="popup-container">
+                    <div className="popup">
+                        <h4>Terimakasih!</h4>
+                        <p>Data berhasil dikirim</p>
+                        <button className="popup-btn" onClick={() =>  setSended(false)}>Oke</button>
+                    </div>
+                </div>
+            }
             <div className="overtime-title">
                 <h2>Form Overtime</h2>
                 <h3>HRGA Dept.</h3>
