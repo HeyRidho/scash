@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Overtime.css";
 
 const Overtime = () => {
-    const [sended, setSended] = useState(true);
+    const [sended, setSended] = useState(false);
     
     let dated = new Date()
     let day = dated.getDate();
