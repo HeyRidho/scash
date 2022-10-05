@@ -11,11 +11,11 @@ const Overtime = () => {
     let month = dated.getMonth()+1;
     let year = dated.getFullYear();
 
-    if(month <= 10) {
+    if(month < 10) {
         month = '0'+ month
     }
 
-    if(day <= 10) {
+    if(day < 10) {
         day = '0'+ day
     }
 
