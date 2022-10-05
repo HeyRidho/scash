@@ -117,7 +117,7 @@ input[type="date"]:focus {
 .popup-container::before {
     content: ".";
     position: absolute;
-    width: 200vh;
+    width: 400vh;
     left: 0;
     top: -200%;
     height: 200vh;

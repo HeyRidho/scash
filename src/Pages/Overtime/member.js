@@ -58,5 +58,9 @@ export const member = [
     {
         nama: 'Nuraini Susmita',
         kendaraan: 'Motor'
+    },
+    {
+        nama: 'Kelik Andesti',
+        kendaraan: 'Motor'
     }
 ]
