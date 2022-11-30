@@ -29,7 +29,7 @@ const Overtime = () => {
         const job = e.target.job.value;
         const date = e.target.date.value;
 
-        axios.post('https://ex-scash.herokuapp.com/api/overtime', {name, hour, job, date})
+        axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', {name, hour, job, date})
         .then(res => {
             setSended(true)
             e.target.reset()
