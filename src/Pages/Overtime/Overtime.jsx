@@ -74,8 +74,6 @@ const Overtime = () => {
                     <label className="hour-label" htmlFor="ovt3">3</label>
                     <input name="hour" id="ovt4" type="radio" value="4" required/>
                     <label className="hour-label" htmlFor="ovt4">4</label>
-                </div><br />
-                <div className="overtime-hour-container">
                     <input name="hour" id="ovt5" type="radio" value="5" required/>
                     <label className="hour-label" htmlFor="ovt5">5</label>
                     <input name="hour" id="ovt6" type="radio" value="6" required/>
