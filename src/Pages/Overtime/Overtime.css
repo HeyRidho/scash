@@ -45,7 +45,7 @@ input[type="radio"] {
     font-weight: bold;
     border-radius: var(--border-radius);
     padding: 10px 16px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: white;
     color: var(--color);
 }
