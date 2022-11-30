@@ -33,6 +33,7 @@ select:focus {
 .overtime-hour-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 input[type="radio"] {
