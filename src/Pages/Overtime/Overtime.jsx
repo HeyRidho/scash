@@ -67,7 +67,7 @@ const Overtime = () => {
                 </select><br />
                 
                 <label className="form-title">Jam Lembur</label>
-                <select id="name" name="name" defaultValue=0 required>
+                <select id="name" name="name" defaultValue={'Teiji'} required>
                     <option value="0" disabled>0 Jam</option>
                     <option value="1">1 Jam</option>
                     <option value="2">2 Jam</option>
