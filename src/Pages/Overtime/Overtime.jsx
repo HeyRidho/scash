@@ -68,17 +68,17 @@ const Overtime = () => {
                 
                 <label className="form-title">Jam Lembur</label>
                 <select id="name" name="name" defaultValue={'Teiji'} required>
-                    <option value="0" disabled>0 Jam</option>
-                    <option value="1">1 Jam</option>
-                    <option value="2">2 Jam</option>
-                    <option value="3">3 Jam</option>
-                    <option value="4">4 Jam</option>
-                    <option value="5">5 Jam</option>
-                    <option value="6">6 Jam</option>
-                    <option value="7">7 Jam</option>
-                    <option value="8">8 Jam</option>
-                    <option value="9">9 Jam</option>
-                    <option value="10">10 Jam</option>
+                    <option value="Teiji" disabled>0 Jam</option>
+                    <option value=1 >1 Jam</option>
+                    <option value=2 >2 Jam</option>
+                    <option value=3 >3 Jam</option>
+                    <option value=4 >4 Jam</option>
+                    <option value=5 >5 Jam</option>
+                    <option value=6 >6 Jam</option>
+                    <option value=7 >7 Jam</option>
+                    <option value=8 >8 Jam</option>
+                    <option value=9 >9 Jam</option>
+                    <option value=10 >10 Jam</option>
                 </select><br />
                 
                 <label className="form-title" htmlFor="job">Deskripsi Pekerjaan</label>
