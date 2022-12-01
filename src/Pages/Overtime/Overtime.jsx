@@ -25,7 +25,7 @@ const Overtime = () => {
         e.preventDefault();
 
         const name = e.target.name.value;
-        const hour = parseInt(e.target.hour.value);
+        const hour = e.target.hour.value;
         const job = e.target.job.value;
         const date = e.target.date.value;
 
@@ -67,7 +67,7 @@ const Overtime = () => {
                 </select><br />
                 
                 <label className="form-title">Jam Lembur</label>
-                <select id="name" name="name" defaultValue={'Teiji'} required>
+                <select id="hour" name="hour" defaultValue={'Teiji'} required>
                     <option value="Teiji" disabled>0 Jam</option>
                     <option value="1" >1 Jam</option>
                     <option value="2" >2 Jam</option>
