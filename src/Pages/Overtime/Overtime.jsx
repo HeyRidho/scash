@@ -32,7 +32,9 @@ const Overtime = () => {
         axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', {name, hour, job, date})
         .then(res => {
             setSended(true)
-            e.target.reset()
+            e.target.hour.reset()
+            e.target.job.reset()
+            e.target.date.reset()
         }).catch(err => console.log(err))
     }
 
@@ -65,24 +67,19 @@ const Overtime = () => {
                 </select><br />
                 
                 <label className="form-title">Jam Lembur</label>
-                <div className="overtime-hour-container">
-                    <input name="hour" id="ovt1" type="radio" value="1" required/>
-                    <label className="hour-label" htmlFor="ovt1">1</label>
-                    <input name="hour" id="ovt2" type="radio" value="2" required/>
-                    <label className="hour-label" htmlFor="ovt2">2</label>
-                    <input name="hour" id="ovt3" type="radio" value="3" required/>
-                    <label className="hour-label" htmlFor="ovt3">3</label>
-                    <input name="hour" id="ovt4" type="radio" value="4" required/>
-                    <label className="hour-label" htmlFor="ovt4">4</label><br/>
-                    <input name="hour" id="ovt5" type="radio" value="5" required/>
-                    <label className="hour-label" htmlFor="ovt5">5</label>
-                    <input name="hour" id="ovt6" type="radio" value="6" required/>
-                    <label className="hour-label" htmlFor="ovt6">6</label>
-                    <input name="hour" id="ovt7" type="radio" value="7" required/>
-                    <label className="hour-label" htmlFor="ovt7">7</label>
-                    <input name="hour" id="ovt8" type="radio" value="8" required/>
-                    <label className="hour-label" htmlFor="ovt8">8</label>
-                </div>
+                <select id="name" name="name" defaultValue=0 required>
+                    <option value="0" disabled>0 Jam</option>
+                    <option value="1">1 Jam</option>
+                    <option value="2">2 Jam</option>
+                    <option value="3">3 Jam</option>
+                    <option value="4">4 Jam</option>
+                    <option value="5">5 Jam</option>
+                    <option value="6">6 Jam</option>
+                    <option value="7">7 Jam</option>
+                    <option value="8">8 Jam</option>
+                    <option value="9">9 Jam</option>
+                    <option value="10">10 Jam</option>
+                </select><br />
                 
                 <label className="form-title" htmlFor="job">Deskripsi Pekerjaan</label>
                 <textarea name="job" id="job" placeholder="Ketik pekerjaan" rows="2" required />
