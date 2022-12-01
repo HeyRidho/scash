@@ -1,6 +1,5 @@
 #overtime {
     padding: 30px 34px;
-    overflow-x: hidden;
 }
 
 form {
@@ -117,11 +116,12 @@ input[type="date"]:focus {
 
 .popup-container::before {
     content: ".";
+    overflow: hidden;
     position: absolute;
     width: 400vh;
     left: 0;
     top: -200%;
-    height: 100vh;
+    height: 200vh;
     background-color: rgba(0,0,0,.8);
     transition: .5s;
 }
