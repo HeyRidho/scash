@@ -1,5 +1,6 @@
 #overtime {
     padding: 30px 34px;
+    overflow-x: hidden;
 }
 
 form {
@@ -120,7 +121,7 @@ input[type="date"]:focus {
     width: 400vh;
     left: 0;
     top: -200%;
-    height: 200vh;
+    height: 100vh;
     background-color: rgba(0,0,0,.8);
     transition: .5s;
 }
