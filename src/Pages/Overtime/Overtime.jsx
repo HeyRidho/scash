@@ -87,7 +87,7 @@ const Overtime = () => {
                 <label className="form-title" htmlFor="date">Tanggal</label><br />
                 <input type="date" name="date" id="date" defaultValue={fullDate}/>
 
-                <button className="form-button"onClick={() => {setLoading(true)}} {loading ? 'disabled' : ' '}>Submit</button>
+                <button className="form-button"onClick={() => {setLoading(true)}} disabled={loading} >Submit</button>
             </form>
                 
         </section>
