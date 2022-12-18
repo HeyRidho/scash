@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Overtime.css";
 
 const Overtime = () => {
+    const [loading, setLoading] = useState(false);
     const [sended, setSended] = useState(false);
     
     let dated = new Date()
@@ -32,9 +33,8 @@ const Overtime = () => {
         axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', {name, hour, job, date})
         .then(res => {
             setSended(true)
-            e.target.hour.reset()
-            e.target.job.reset()
-            e.target.date.reset()
+            setLoading(false)
+            e.target.reset()
         }).catch(err => console.log(err))
     }
 
@@ -87,7 +87,7 @@ const Overtime = () => {
                 <label className="form-title" htmlFor="date">Tanggal</label><br />
                 <input type="date" name="date" id="date" defaultValue={fullDate}/>
 
-                <button className="form-button">Submit</button>
+                <button className="form-button"onClick={() => {setLoading(true)}} {loading ? 'disabled' : ' '}>Submit</button>
             </form>
                 
         </section>
