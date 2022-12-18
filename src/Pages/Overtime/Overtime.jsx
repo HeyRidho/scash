@@ -23,6 +23,7 @@ const Overtime = () => {
     let fullDate = `${year}-${month}-${day}`;
 
     function handleForm(e) {
+        setLoading(true);
         e.preventDefault();
 
         const name = e.target.name.value;
@@ -87,7 +88,7 @@ const Overtime = () => {
                 <label className="form-title" htmlFor="date">Tanggal</label><br />
                 <input type="date" name="date" id="date" defaultValue={fullDate}/>
 
-                <button className="form-button"onClick={() => {setLoading(true)}} disabled={loading} >Submit</button>
+                <button className="form-button" disabled={loading} >Submit</button>
             </form>
                 
         </section>
