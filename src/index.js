@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import { DinasLuar, ErrorPage, Home, Overtime, Request } from './Pages';
+import { ErrorPage, Home, Overtime, Request, UpahAneka } from './Pages';
 
 const router = createBrowserRouter([
   {
@@ -25,8 +25,8 @@ const router = createBrowserRouter([
     element: <Request />
   },
   {
-    path: 'dinasluar',
-    element: <DinasLuar />
+    path: 'upahaneka',
+    element: <UpahAneka />
   }
 ]);
 

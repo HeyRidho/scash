@@ -8,12 +8,13 @@
 
 :root {
     --font-family: 'Nunito', sans-serif;
-    --color: #216559;
-    --second-color: #22453f;
+    --color: #1b1b1b;
+    --second-color: #858585;
     --border-radius: 5px;
 }
 
 body {
+    color: var(--color);
     font-family: var(--font-family);
-    background-color: #F4F1E8;
+    background-color: #ffffff;
 }
