@@ -45,7 +45,7 @@ const UpahAneka = () => {
         clearTimeout(timer)
 
         const newTimer = setTimeout(async () => {
-            const data = await axios.get(`http://localhost:5000/api/data/${nik}`)
+            const data = await axios.get(`https://gray-sleepy-fish.cyclic.app/api/data/${nik}`)
             console.log(data.data)
             setDataEmployee(data.data)
         }, 1000)
