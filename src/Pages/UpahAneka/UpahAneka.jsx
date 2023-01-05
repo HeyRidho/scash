@@ -9,6 +9,7 @@ const UpahAneka = () => {
     const [dataEmployee, setDataEmployee] = useState({
         nip: "Belum ada data",
         nama: "Belum ada data",
+        jabatan: "Belum ada data",
         status: "Belum ada data",
         bagian: "Belum ada data"
     });
@@ -42,7 +43,8 @@ const UpahAneka = () => {
         }
 
     function checkEmployee(nik) {
-        clearTimeout(timer)
+        if(nik) {
+            clearTimeout(timer)
 
         const newTimer = setTimeout(async () => {
             const data = await axios.get(`https://gray-sleepy-fish.cyclic.app/api/data/${nik}`)
@@ -51,6 +53,15 @@ const UpahAneka = () => {
         }, 1000)
 
         setTimer(newTimer)
+        } else {
+            setDataEmployee({
+                nip: "Belum ada data",
+                nama: "Belum ada data",
+                jabatan: "Belum ada data",
+                status: "Belum ada data",
+                bagian: "Belum ada data"
+            });
+        }
         
     }
 
@@ -95,11 +106,8 @@ const UpahAneka = () => {
                 <label htmlFor="name" className="form-title">Nama</label><br />
                 <input type="text" name="nama" id="nama" value={dataEmployee.nama} disabled/>
 
-                <label htmlFor="name" className="form-title">Bagian</label><br />
-                <input type="text" name="bagian" id="bagian" value={dataEmployee.bagian} disabled/>
-
-                <label htmlFor="name" className="form-title">Status</label><br />
-                <input type="text" name="status" id="status" value={dataEmployee.status} disabled/>
+                <label htmlFor="name" className="form-title">Bagian / Jabatan / Status</label><br />
+                <input type="text" name="bagian" id="bagian" value={`${dataEmployee.bagian} / ${dataEmployee.jabatan} / ${dataEmployee.status}`} disabled/>
 
                 <label className="form-title">Upah Aneka</label>
                 <select id="hour" name="hour" defaultValue={'none'} onChange={(e) => {dataEmployee.nama !== "Belum ada data" && upahAnekaValue(e.target.value)} } required>
@@ -122,6 +130,12 @@ const UpahAneka = () => {
                 }} />
                 <label htmlFor="pernikahan" className="form-title">Pernikahan Kedua (Istri pertama meninggal dunia)</label><br />
                 </> }
+
+                <label htmlFor="name" className="form-title">Anak Ke</label><select  style={{ width: "fit-content", marginLeft: "10px" }} id="anak" name="anak" defaultValue={'none'} required>
+                    <option value="ANAK KE 1" >1</option>
+                    <option value="ANAK KE 2" >2</option>
+                    <option value="ANAK KE 3" >3</option>
+                </select><br />
 
                 <label htmlFor="name" className="form-title">Nilai</label><br />
                 <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" value={upahAneka ? formatter.format(upahAneka) : "Harap masukkan NIK terlebih dahulu"} required disabled/>                
