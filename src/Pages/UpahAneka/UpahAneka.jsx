@@ -131,11 +131,13 @@ const UpahAneka = () => {
                 <label htmlFor="pernikahan" className="form-title">Pernikahan Kedua (Istri pertama meninggal dunia)</label><br />
                 </> }
 
+                { jenisUpahAneka === "Kelahiran" && <>
                 <label htmlFor="name" className="form-title">Anak Ke</label><select  style={{ width: "fit-content", marginLeft: "10px" }} id="anak" name="anak" defaultValue={'none'} required>
                     <option value="ANAK KE 1" >1</option>
                     <option value="ANAK KE 2" >2</option>
                     <option value="ANAK KE 3" >3</option>
                 </select><br />
+                </>}
 
                 <label htmlFor="name" className="form-title">Nilai</label><br />
                 <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" value={upahAneka ? formatter.format(upahAneka) : "Harap masukkan NIK terlebih dahulu"} required disabled/>                
