@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./UpahAneka.css";
+import { data } from "../data";
 
 const UpahAneka = () => {
 
     const [upahAneka, setUpahAneka] = useState(0);
     const [jenisUpahAneka, setJenisUpahAneka] = useState("");
+    const [duka, setDuka] = useState("");
     const [dataEmployee, setDataEmployee] = useState({
         nip: "Belum ada data",
         nama: "Belum ada data",
         jabatan: "Belum ada data",
         status: "Belum ada data",
-        bagian: "Belum ada data"
+        bagian: "Belum ada data",
+        golongan: "Belum ada data"
     });
-    const [timer, setTimer] = useState(null)
+    // const [timer, setTimer] = useState(null)
 
     const [loading, setLoading] = useState(false);
     const [sended, setSended] = useState(false);
@@ -43,26 +46,58 @@ const UpahAneka = () => {
         }
 
     function checkEmployee(nik) {
-        if(nik) {
-            clearTimeout(timer)
 
-        const newTimer = setTimeout(async () => {
-            const data = await axios.get(`https://gray-sleepy-fish.cyclic.app/api/data/${nik}`)
-            console.log(data.data)
-            setDataEmployee(data.data)
-        }, 1000)
-
-        setTimer(newTimer)
-        } else {
-            setDataEmployee({
-                nip: "Belum ada data",
-                nama: "Belum ada data",
-                jabatan: "Belum ada data",
-                status: "Belum ada data",
-                bagian: "Belum ada data"
-            });
-        }
+        data.find(e => {
+            if(e.nip === nik.trim()) {
+                setDataEmployee(e)
+            }
+            return e
+        })
         
+        
+
+        // if(nik) {
+        //     clearTimeout(timer)
+
+        // const newTimer = setTimeout(async () => {
+        //     const data = await axios.get(`https://gray-sleepy-fish.cyclic.app/api/data/${nik}`)
+        //     console.log(data.data)
+        //     setDataEmployee(data.data)
+        // }, 1000)
+
+        // setTimer(newTimer)
+        // }
+        
+    }
+
+    useEffect(() => {
+        if(jenisUpahAneka === "Kedukaan") {
+            handleKedukaan(duka)
+        }
+    })
+
+    function handleKedukaan(meninggal) {
+        setUpahAneka(0)
+        setDuka(meninggal)
+        if(parseInt(dataEmployee.golongan) >= 6) {
+            if(meninggal.match("Karyawan")) {
+                setUpahAneka(3751210)
+            } else {
+                setUpahAneka(1875600)
+            }
+        } else if(parseInt(dataEmployee.golongan) >= 4 && parseInt(dataEmployee.golongan) <= 5) {
+            if(meninggal.match("Karyawan")) {
+                setUpahAneka(3001000)
+            } else {
+                setUpahAneka(1875600)
+            }
+        } else if(parseInt(dataEmployee.golongan) <= 3) {
+            if(meninggal.match("Karyawan")) {
+                setUpahAneka(2250720)
+            } else {
+                setUpahAneka(1875600)
+            }
+        }
     }
 
     function handleForm(e) {
@@ -101,13 +136,21 @@ const UpahAneka = () => {
             
             <form onSubmit={handleForm}>
                 <label htmlFor="name" className="form-title">NIK</label><br />
-                <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" onChange={(e) => checkEmployee(e.target.value)} required/>
+                <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" onChange={(e) => {setDataEmployee({
+                    nip: "Data tidak ditemukan",
+                    nama: "Data tidak ditemukan",
+                    jabatan: "Data tidak ditemukan",
+                    status: "Data tidak ditemukan",
+                    bagian: "Data tidak ditemukan",
+                    golongan: "Data tidak ditemukan"
+                })
+                    checkEmployee(e.target.value)}} required/>
                 
-                <label htmlFor="name" className="form-title">Nama</label><br />
+                <label htmlFor="nama" className="form-title">Nama</label><br />
                 <input type="text" name="nama" id="nama" value={dataEmployee.nama} disabled/>
 
-                <label htmlFor="name" className="form-title">Bagian / Jabatan / Status</label><br />
-                <input type="text" name="bagian" id="bagian" value={`${dataEmployee.bagian} / ${dataEmployee.jabatan} / ${dataEmployee.status}`} disabled/>
+                <label htmlFor="name" className="form-title">Bagian / Jabatan / Golongan / Status</label><br />
+                <input type="text" name="bagian" id="bagian" value={`${dataEmployee.bagian} / ${dataEmployee.jabatan} / ${dataEmployee.golongan} / ${dataEmployee.status}`} disabled/>
 
                 <label className="form-title">Upah Aneka</label>
                 <select id="hour" name="hour" defaultValue={'none'} onChange={(e) => {dataEmployee.nama !== "Belum ada data" && upahAnekaValue(e.target.value)} } required>
@@ -131,19 +174,44 @@ const UpahAneka = () => {
                 <label htmlFor="pernikahan" className="form-title">Pernikahan Kedua (Istri pertama meninggal dunia)</label><br />
                 </> }
 
-                { jenisUpahAneka === "Kelahiran" && <>
+                { jenisUpahAneka === "Kelahiran" || jenisUpahAneka === "Khitan" ?  <>
                 <label htmlFor="name" className="form-title">Anak Ke</label><select  style={{ width: "fit-content", marginLeft: "10px" }} id="anak" name="anak" defaultValue={'none'} required>
                     <option value="ANAK KE 1" >1</option>
                     <option value="ANAK KE 2" >2</option>
                     <option value="ANAK KE 3" >3</option>
+                    <option value="ANAK KE 4" >4</option>
+                    <option value="ANAK KE 5" >5</option>
                 </select><br />
-                </>}
+                </> : " "}
+
+                { jenisUpahAneka === "Kedukaan" && <>
+                <label htmlFor="name" className="form-title">Yang meninggal dunia</label>
+                <select onChange={(e) => {handleKedukaan(e.target.value)} } id="duka" name="duka" defaultValue={'none'} required>
+                    <option value="none" disabled>Pilih</option>
+                    <option value="Karyawan" >Karyawan</option>
+                    <option value="Istri" >Istri</option>
+                    <option value="Ayah Kandung" >Ayah Kandung</option>
+                    <option value="Ibu Kandung" >Ibu Kandung</option>
+                    <option value="Ayah Mertua" >Ayah Mertua</option>
+                    <option value="Ibu Mertua" >Ibu Mertua</option>
+                    <option value="Anak Ke 1" >Anak Ke 1</option>
+                    <option value="Anak Ke 2" >Anak Ke 2</option>
+                    <option value="Anak Ke 3" >Anak Ke 3</option>
+                </select><br /></> }
 
                 <label htmlFor="name" className="form-title">Nilai</label><br />
-                <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" value={upahAneka ? formatter.format(upahAneka) : "Harap masukkan NIK terlebih dahulu"} required disabled/>                
+                <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" value={upahAneka ? formatter.format(upahAneka) : "Lengkapi data terlebih dahulu"} required disabled/>                
 
                 <label className="form-title" htmlFor="date">Tanggal Peristiwa</label><br />
                 <input type="date" name="date" id="date" required />
+
+                <label htmlFor="diagnosa" className="form-title">Diagnosa</label><br />
+                <input type="text" name="diagnosa" id="diagnosa" />
+
+                <select onChange={(e) => {handleKedukaan(e.target.value)} } id="duka" name="duka" defaultValue={'none'} required>
+                    <option value="Rawat Inap">Rawat Inap</option>
+                    <option value="Istirahat di Rumah">Istirahat di Rumah</option>
+                </select>
 
                 <button className="form-button" disabled={loading} >Submit</button>
             </form>
