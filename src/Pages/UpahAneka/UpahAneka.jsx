@@ -47,12 +47,18 @@ const UpahAneka = () => {
 
     function checkEmployee(nik) {
 
-        data.find(e => {
-            if(e.nip === nik.trim()) {
-                setDataEmployee(e)
-            }
-            return e
-        })
+        const res = data.find(e => {
+            return e.nip === nik.trim()
+    }) || {
+        nip: "Data tidak ditemukan",
+        nama: "Data tidak ditemukan",
+        jabatan: "Data tidak ditemukan",
+        status: "Data tidak ditemukan",
+        bagian: "Data tidak ditemukan",
+        golongan: "Data tidak ditemukan"
+    }
+
+        setDataEmployee(res)
         
         
 
@@ -136,15 +142,7 @@ const UpahAneka = () => {
             
             <form onSubmit={handleForm}>
                 <label htmlFor="name" className="form-title">NIK</label><br />
-                <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" onChange={(e) => {setDataEmployee({
-                    nip: "Data tidak ditemukan",
-                    nama: "Data tidak ditemukan",
-                    jabatan: "Data tidak ditemukan",
-                    status: "Data tidak ditemukan",
-                    bagian: "Data tidak ditemukan",
-                    golongan: "Data tidak ditemukan"
-                })
-                    checkEmployee(e.target.value)}} required/>
+                <input type="text" name="nik" id="nik" placeholder="Masukkan NIK" onChange={(e) => {checkEmployee(e.target.value)}} required/>
                 
                 <label htmlFor="nama" className="form-title">Nama</label><br />
                 <input type="text" name="nama" id="nama" value={dataEmployee.nama} disabled/>
