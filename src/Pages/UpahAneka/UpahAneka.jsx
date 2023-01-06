@@ -203,13 +203,14 @@ const UpahAneka = () => {
                 <label className="form-title" htmlFor="date">Tanggal Peristiwa</label><br />
                 <input type="date" name="date" id="date" required />
 
+                { jenisUpahAneka === "Sakit" && <>
                 <label htmlFor="diagnosa" className="form-title">Diagnosa</label><br />
                 <input type="text" name="diagnosa" id="diagnosa" />
 
-                <select onChange={(e) => {handleKedukaan(e.target.value)} } id="duka" name="duka" defaultValue={'none'} required>
+                <select id="keterangan" name="keterangan" defaultValue={'none'} required>
                     <option value="Rawat Inap">Rawat Inap</option>
                     <option value="Istirahat di Rumah">Istirahat di Rumah</option>
-                </select>
+                </select></> }
 
                 <button className="form-button" disabled={loading} >Submit</button>
             </form>
