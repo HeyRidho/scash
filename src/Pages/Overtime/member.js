@@ -24,10 +24,6 @@ export const member = [
         kendaraan: 'Jalan Kaki'
     },
     {
-        nama: 'Muhammad Azdhar Syahputra',
-        kendaraan: 'Jalan Kaki'
-    },
-    {
         nama: 'Cory Fuji Ayu Lestari',
         kendaraan: 'Motor'
     },
@@ -40,8 +36,8 @@ export const member = [
         kendaraan: 'Mobil'
     },
     {
-        nama: 'Rahmalia Novianti',
-        kendaraan: 'Motor'
+        nama: 'Akbar Herlambang',
+        kendaraan: 'Jalan Kaki'
     },
     {
         nama: 'Dhina Aryandhi',
