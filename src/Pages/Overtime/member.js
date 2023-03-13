@@ -56,6 +56,14 @@ export const member = [
         kendaraan: 'Motor'
     },
     {
+        nama: 'Ewi Gusti',
+        kendaraan: 'Jalan Kaki'
+    },
+    {
+        nama: 'Rangga',
+        kendaraan: 'Jalan Kaki'
+    },
+    {
         nama: 'Kelik Andesti',
         kendaraan: 'Motor'
     }
