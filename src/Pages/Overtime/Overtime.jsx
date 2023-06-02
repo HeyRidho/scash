@@ -1,5 +1,6 @@
 import { member } from "./member";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Overtime.css";
 import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
@@ -83,10 +84,10 @@ const Overtime = () => {
     return (
         <section id="overtime">
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
-                <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
-                Form Overtime HRGA Dept.
+                <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
+                Form Overtime HRGA
                 <Typography variant="body2" >
-                Sesuaikan tanggalnya jika Holiday Overtime
+                Check data Overtime-mu disini : <Link to="/dataovertime">Data Overtime</Link>
                 </Typography>
                 </Typography>
                 <Autocomplete
