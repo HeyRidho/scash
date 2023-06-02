@@ -1,96 +1,200 @@
 import { member } from "./member";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Overtime.css";
+import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
+import dayjs from 'dayjs';
+import { Send } from '@mui/icons-material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
 
 const Overtime = () => {
-    const [loading, setLoading] = useState(false);
-    const [sended, setSended] = useState(false);
+    const [name, setName] = useState('');
+    const [hour, setHour] = useState('');
+    const [pickup, setPickup] = useState('Tidak');
+    const [job, setJob] = useState('');
+    const [open, setOpen] = useState(false);
+    const [openBar, setOpenBar] = useState(false);
+    const [openBarFail, setOpenBarFail] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setOpenBar(false);
+    };
+
+    const handleCloseFail = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setOpenBarFail(false);
+    };
+    
+    const handleOT = (event) => {
+        setHour(event.target.value);
+    };
+    
+    const handlePickup = (event) => {
+        setPickup(event.target.value);
+    };
     
     let dated = new Date()
     let day = dated.getDate();
-    let month = dated.getMonth()+1;
+    let month = dated.getMonth() + 1;
     let year = dated.getFullYear();
-
-    if(month < 10) {
-        month = '0'+ month
+    
+    if (month < 10) {
+        month = '0' + month
     }
 
-    if(day < 10) {
-        day = '0'+ day
+    if (day < 10) {
+        day = '0' + day
     }
-
+    
     let fullDate = `${year}-${month}-${day}`;
+    const [dateValue, setDateValue] = useState(dayjs(fullDate));
 
-    function handleForm(e) {
-        setLoading(true);
-        e.preventDefault();
-
-        const name = e.target.name.value;
-        const hour = e.target.hour.value;
-        const job = e.target.job.value;
-        const date = e.target.date.value;
-
-        axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', {name, hour, job, date})
+    function sendData(e) {
+        setOpen(true);
+        axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', { name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
         .then(res => {
-            setSended(true)
-            setLoading(false)
-            e.target.reset()
-        }).catch(err => console.log(err))
+            setOpen(false);
+            setOpenBar(true);
+            console.log('Success : ',{ name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
+        }).catch(err => {
+            setOpen(false);
+            setOpenBarFail(true);
+            console.log(err)
+        })
+    }
+
+    function resetForm() {
+        setJob('');
+        setHour('');
+        setPickup('');
     }
 
 
     return (
         <section id="overtime">
-            { sended &&
-                <div className="popup-container">
-                    <div className="popup">
-                        <h4>Terimakasih!</h4>
-                        <p>Data berhasil dikirim</p>
-                        <button className="popup-btn" onClick={() =>  setSended(false)}>Oke</button>
-                    </div>
+            <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
+                <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
+                Form Overtime HRGA Dept.
+                </Typography>
+                <Autocomplete
+                fullWidth
+                style={{marginBottom: 20}}
+                disablePortal
+                id="combo-box"
+                options={member}
+                onChange={(event, value) => {
+                    setName(value);
+                    member.filter(member => { if(member == value) setPickup(member.jemputan) });
+                }}
+                renderInput={(params) => <TextField {...params} label="Pilih Nama" />}
+                />
+
+                <Stack>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                    slotProps={{ textField: { fullWidth: true } }}
+                    label="Tanggal"
+                    value={dateValue}
+                    onChange={(newValue) => setDateValue(newValue)}
+                    />
+                </LocalizationProvider><br />
+                </Stack>
+
+                <Stack direction="row" spacing={1}>
+                <FormControl fullWidth>
+                    <InputLabel id="simple-select-label">Overtime</InputLabel>
+                    <Select
+                    labelId="simple-select-label"
+                    id="simple-select"
+                    value={hour}
+                    label="Overtime"
+                    onChange={handleOT}
+                    >
+                    <MenuItem value={0}>Teiji</MenuItem>
+                    <MenuItem value={1}>1 Jam</MenuItem>
+                    <MenuItem value={2}>2 Jam</MenuItem>
+                    <MenuItem value={3}>3 Jam</MenuItem>
+                    <MenuItem value={4}>4 Jam</MenuItem>
+                    <MenuItem value={5}>5 Jam</MenuItem>
+                    <MenuItem value={6}>6 Jam</MenuItem>
+                    <MenuItem value={7}>7 Jam</MenuItem>
+                    <MenuItem value={8}>8 Jam</MenuItem>
+                    <MenuItem value={9}>9 Jam</MenuItem>
+                    <MenuItem value={10}>10 Jam</MenuItem>
+                    <MenuItem value={11}>11 Jam</MenuItem>
+                    <MenuItem value={12}>12 Jam</MenuItem>
+                    </Select>
+                </FormControl>
+                
+                <FormControl fullWidth>
+                    <InputLabel id="simple-select-label">Jemputan</InputLabel>
+                    <Select
+                    labelId="simple-select-label"
+                    id="simple-select"
+                    value={pickup}
+                    label="Jemputan"
+                    onChange={handlePickup}
+                    >
+                    <MenuItem value={"Tidak"}>Tidak</MenuItem>
+                    <MenuItem value={"Bekasi Barat"}>Bekasi Barat</MenuItem>
+                    <MenuItem value={"Cawang"}>Cawang</MenuItem>
+                    <MenuItem value={"Timur"}>Timur</MenuItem>
+                    <MenuItem value={"Bogor"}>Bogor</MenuItem>
+                    <MenuItem value={"Cikarang"}>Cikarang</MenuItem>
+                    </Select>
+                </FormControl>
+                </Stack><br />
+
+                <TextField
+                fullWidth
+                style={{marginBottom: 30}}
+                id="outlined-multiline-static"
+                label="Pekerjaan"
+                multiline
+                rows={4}
+                value={job}
+                onChange={(e) => setJob(e.target.value)}
+                />
+
+                <Stack direction="row" spacing={1}>
+                    <Button variant="outlined"  fullWidth style={{height: 50}} onClick={(e) => resetForm()}>
+                        RESET
+                    </Button>
+                    <Button variant="contained" endIcon={<Send />} fullWidth onClick={(e) => sendData()} style={{height: 50}}>
+                        Send
+                    </Button>
+                </Stack>
+                <div>
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={open}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
+
+                <Snackbar open={openBar} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Terimakasih, Data sudah terkirim
+                    </Alert>
+                </Snackbar>
+                
+                <Snackbar open={openBarFail} autoHideDuration={6000} onClose={handleCloseFail}>
+                    <Alert onClose={handleCloseFail} severity="error" sx={{ width: '100%' }}>
+                    Harap lengkapi data terlebih dahulu
+                    </Alert>
+                </Snackbar>
                 </div>
-            }
-            <div className="overtime-title">
-                <h2>Form Overtime</h2>
-                <h3>HRGA Dept.</h3>
             </div>
-            
-            <form onSubmit={handleForm}>
-                <label htmlFor="name" className="form-title">Nama</label><br />
-                <select id="name" name="name" defaultValue={'DEFAULT'} required>
-                    <option value="DEFAULT" disabled>Pilih Nama</option>
-                    {
-                        member.map(mp => {
-                            return <option key={mp.nama} value={mp.nama}>{mp.nama}</option>
-                        })
-                    }
-                </select><br />
-                
-                <label className="form-title">Jam Lembur</label>
-                <select id="hour" name="hour" defaultValue={'0'} required>
-                    <option value="0">0 Jam</option>
-                    <option value="1" >1 Jam</option>
-                    <option value="2" >2 Jam</option>
-                    <option value="3" >3 Jam</option>
-                    <option value="4" >4 Jam</option>
-                    <option value="5" >5 Jam</option>
-                    <option value="6" >6 Jam</option>
-                    <option value="7" >7 Jam</option>
-                    <option value="8" >8 Jam</option>
-                    <option value="9" >9 Jam</option>
-                    <option value="10" >10 Jam</option>
-                </select><br />
-                
-                <label className="form-title" htmlFor="job">Deskripsi Pekerjaan</label>
-                <textarea name="job" id="job" placeholder="Ketik pekerjaan" rows="2" required />
-
-                <label className="form-title" htmlFor="date">Tanggal</label><br />
-                <input type="date" name="date" id="date" defaultValue={fullDate}/>
-
-                <button className="form-button" disabled={loading} >Submit</button>
-            </form>
-                
         </section>
     )
 }
