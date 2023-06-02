@@ -60,26 +60,30 @@ const Overtime = () => {
                 </LocalizationProvider><br />
                 </Stack>
 
-                <table style={{width: "100%", fontSize: 12, border: ".5px solid black", borderCollapse: "collapse", color: "#2f2f2f"}}>
+                <table style={{width: "100%", fontSize: 12, border: ".5px solid gray", borderCollapse: "collapse", color: "black"}}>
                     <tr key="head">
-                        <td style={{width: "fit-content",padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}  align="center"><strong>Nama</strong></td>
-                        <td style={{width: "fit-content",padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}  align="center"><strong>Jam</strong></td>
-                        <td style={{width: "fit-content",padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}  align="center"><strong>Pekerjaan</strong></td>
-                        <td style={{width: "fit-content",padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}  align="center"><strong>Tanggal</strong></td>
-                        <td style={{width: "fit-content",padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}  align="center"><strong>Jemputan</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Nama</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Jam</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Pekerjaan</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Jemputan</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Tanggal</strong></td>
                     </tr>
                 {
                     dataOvertime && dataOvertime.map((item) => {
-                      console.log(dateValue.format('DD/MM/YYYY')) 
-                      console.log(new Date(item.date).toLocaleDateString())
-                            return(
-                                <tr key={item._id} style={{padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}>
-                                    <td style={{padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}>{item.name}</td>
-                                    <td style={{padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}} align="center">{item.hour}</td>
-                                    <td style={{padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}}>{item.job}</td>
-                                    <td style={{padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}} align="center">{new Date(item.date).toLocaleDateString()}</td>
-                                    <td style={{padding: 3, border: ".5px solid #2f2f2f", borderCollapse: "collapse"}} align="center">{item.pickup}</td>
-                                </tr>)
+                      const date1 = new Date(dateValue.format('DD/MM/YYYY')).toLocaleDateString();
+                      const date2 = new Date(item.date).toLocaleDateString();
+                      if(date1 === date2) {
+                        return(
+                            <tr key={item._id} style={{padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}>
+                                <td style={{padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}>{item.name}</td>
+                                <td style={{padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}} align="center">{item.hour}</td>
+                                <td style={{padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}}>{item.job}</td>
+                                <td style={{padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}} align="center">{item.pickup}</td>
+                                <td style={{padding: 3, border: ".5px solid gray", borderCollapse: "collapse"}} align="center">{new Date(item.date).toLocaleDateString()}</td>
+                        </tr>)
+                      }
+                      
+                            
                         
                     })
                 }
