@@ -33,7 +33,7 @@ export const member = [
     },
     {
         label: 'Citra',
-        jemputan: 'Mobil'
+        jemputan: 'Tidak'
     },
     {
         label: 'Akbar',
