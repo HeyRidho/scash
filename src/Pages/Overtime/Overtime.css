@@ -11,21 +11,6 @@ form {
     font-weight: bold;
 }
 
-select {
-    width: 100%;
-    height: 30px;
-    font-size: 12pt;
-    padding: 0px 10px;
-    border: none;
-    border-radius: var(--border-radius);
-    margin-top: 10px;
-    margin-bottom: 20px;
-    background-color: var(--color);
-    color: white;
-    font-family: 'Nunito', sans-serif;
-    outline: 2px solid var(--second-color);
-}
-
 select:focus {
     outline: 2px solid var(--second-color);
 }
@@ -36,10 +21,6 @@ select:focus {
     margin-top: 20px;
 }
 
-input[type="radio"] {
-    display: none;
-}
-
 .hour-label {
     border: 2px solid var(--second-color);
     font-weight: bold;
@@ -48,25 +29,6 @@ input[type="radio"] {
     margin-bottom: 10px;
     background-color: white;
     color: var(--color);
-}
-
-input[type="radio"]:checked + label {
-    color: white;
-    border: 2px solid var(--second-color);
-    background-color: var(--color);
-}
-
-#overtime textarea {
-    margin-top: 10px;
-    padding: 5px 10px;
-    width: 100%;
-    color: black;
-    font-family: 'Nunito', sans-serif;
-    outline: none;
-    border: 2px solid var(--second-color);
-    border-radius: var(--border-radius);
-    font-size: 12pt;
-    margin-bottom: 20px;
 }
 
 .form-button {
@@ -85,23 +47,6 @@ input[type="radio"]:checked + label {
 .form-button:hover {
     background-color: var(--second-color);
     transition: .5s;
-}
-
-input[type="date"] {
-    margin-top: 10px;
-    font-family: var(--font-family);
-    font-size: 12pt;
-    border-radius: var(--border-radius);
-    border: 2px solid var(--second-color);
-    width: 100%;
-    padding: 4px 5px;
-    margin-bottom: 30px;
-    background-color: white;
-    padding: 5px 10px;
-}
-
-input[type="date"]:focus {
-    outline: none;
 }
 
 .popup-container {
@@ -144,4 +89,8 @@ input[type="date"]:focus {
     border: none;
     color: white;
     font-family: var(--font-family);
+}
+
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+    margin-bottom: 20px;
 }

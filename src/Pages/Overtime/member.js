@@ -1,62 +1,67 @@
 export const member = [
     {
-        nama: 'Mulyady',
-        kendaraan: 'Mobil'
+        label: 'Mulyady',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Ariningsih',
-        kendaraan: 'Motor'
+        label: 'Ariningsih',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Ismail Marzuki',
-        kendaraan: 'Mobil'
+        label: 'Ismail',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Achmad Saugi',
-        kendaraan: 'Jemputan'
+        label: 'Saugi',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Teguh Aprilyanto',
-        kendaraan: 'Motor'
+        label: 'Teguh',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Muhammad Ridho Darmawan',
-        kendaraan: 'Jalan Kaki'
+        label: 'Ridho',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Cory Fuji Ayu Lestari',
-        kendaraan: 'Motor'
+        label: 'Tari',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Albert Sembiring',
-        kendaraan: 'Jemputan'
+        label: 'Albert',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Citra Dewi Andiditia',
-        kendaraan: 'Mobil'
+        label: 'Citra',
+        jemputan: 'Mobil'
     },
     {
-        nama: 'Akbar Herlambang',
-        kendaraan: 'Jalan Kaki'
+        label: 'Akbar',
+        jemputan: 'Cikarang'
     },
     {
-        nama: 'Dhina Aryandhi',
-        kendaraan: 'Motor'
+        label: 'Dhina',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Budi Susilo',
-        kendaraan: 'Motor'
+        label: 'Rangga',
+        jemputan: 'Tidak'
+    },
+    
+    {
+        label: 'Ewi',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Ridwan',
-        kendaraan: 'Motor'
+        label: 'Aini',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Nuraini Susmita',
-        kendaraan: 'Motor'
+        label: 'Desti',
+        jemputan: 'Tidak'
     },
     {
-        nama: 'Kelik Andesti',
-        kendaraan: 'Motor'
+        label: 'Budi',
+        jemputan: 'Tidak'
     }
 ]
