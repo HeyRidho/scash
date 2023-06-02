@@ -83,8 +83,11 @@ const Overtime = () => {
     return (
         <section id="overtime">
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
-                <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
+                <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA Dept.
+                <Typography variant="body2" >
+                Sesuaikan tanggalnya jika ada Holiday Overtime
+                </Typography>
                 </Typography>
                 <Autocomplete
                 fullWidth
@@ -171,7 +174,7 @@ const Overtime = () => {
                         RESET
                     </Button>
                     <Button variant="contained" endIcon={<Send />} fullWidth onClick={(e) => sendData()} style={{height: 50}}>
-                        Send
+                        KIRIM
                     </Button>
                 </Stack>
                 <div>
