@@ -85,6 +85,9 @@ const Overtime = () => {
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
                 <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA Dept.
+                <Typography variant="body2" >
+                Sesuaikan tanggalnya jika ada Holiday Overtime
+                </Typography>
                 </Typography>
                 <Autocomplete
                 fullWidth
