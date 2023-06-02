@@ -87,7 +87,7 @@ const Overtime = () => {
                 <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA
                 <Typography variant="body2" >
-                Check data Overtime-mu disini : <Link to="/dataovertime">Data Overtime</Link>
+                Check data Overtime-mu disini : <Link to="/dataovertime">Overtime</Link>
                 </Typography>
                 </Typography>
                 <Autocomplete
