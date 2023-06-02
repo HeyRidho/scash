@@ -83,7 +83,7 @@ const Overtime = () => {
     return (
         <section id="overtime">
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
-                <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
+                <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA Dept.
                 </Typography>
                 <Autocomplete
