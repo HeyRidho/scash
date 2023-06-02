@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
-import { ErrorPage, Home, Overtime, Request, UpahAneka } from './Pages';
+import { ErrorPage, Home, Overtime, DataOvertime, Request, UpahAneka } from './Pages';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: 'overtime',
     element: <Overtime />
+  },
+  {
+    path: 'dataovertime',
+    element: <DataOvertime />
   },
   {
     path: 'request',

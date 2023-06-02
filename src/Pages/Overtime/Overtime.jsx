@@ -86,7 +86,7 @@ const Overtime = () => {
                 <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA Dept.
                 <Typography variant="body2" >
-                Sesuaikan tanggalnya jika ada Holiday Overtime
+                Sesuaikan tanggalnya jika Holiday Overtime
                 </Typography>
                 </Typography>
                 <Autocomplete
