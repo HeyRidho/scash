@@ -174,7 +174,7 @@ const Overtime = () => {
                         RESET
                     </Button>
                     <Button variant="contained" endIcon={<Send />} fullWidth onClick={(e) => sendData()} style={{height: 50}}>
-                        Send
+                        KIRIM
                     </Button>
                 </Stack>
                 <div>
