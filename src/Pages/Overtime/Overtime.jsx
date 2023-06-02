@@ -1,5 +1,5 @@
 import { member } from "./member";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./Overtime.css";
 import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
@@ -94,7 +94,7 @@ const Overtime = () => {
                 options={member}
                 onChange={(event, value) => {
                     setName(value);
-                    member.filter(member => { if(member == value) setPickup(member.jemputan) });
+                    member.filter(member => member === value ? setPickup(member.jemputan) : console.log(value));
                 }}
                 renderInput={(params) => <TextField {...params} label="Pilih Nama" />}
                 />
