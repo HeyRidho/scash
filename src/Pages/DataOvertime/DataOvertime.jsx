@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./Overtime.css";
+import "./DataOvertime.css";
 import { Stack, Typography, Backdrop, CircularProgress } from '@mui/material';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -45,7 +45,7 @@ const Overtime = () => {
     return (
         <section id="overtime">
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
-                <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
+                <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
                 Data Overtime HRGA
                 </Typography>
 
