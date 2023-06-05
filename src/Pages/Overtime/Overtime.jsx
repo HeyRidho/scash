@@ -107,6 +107,7 @@ const Overtime = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                     slotProps={{ textField: { fullWidth: true } }}
+                    format="DD/MM/YYYY"
                     label="Tanggal"
                     value={dateValue}
                     onChange={(newValue) => setDateValue(newValue)}
