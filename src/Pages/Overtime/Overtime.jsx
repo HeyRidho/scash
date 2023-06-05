@@ -151,7 +151,7 @@ const Overtime = () => {
                     onChange={handlePickup}
                     >
                     <MenuItem value={"Tidak"}>Tidak</MenuItem>
-                    <MenuItem value={"Bekasi Barat"}>Bekasi Barat</MenuItem>
+                    <MenuItem value={"Barat"}>Barat</MenuItem>
                     <MenuItem value={"Cawang"}>Cawang</MenuItem>
                     <MenuItem value={"Timur"}>Timur</MenuItem>
                     <MenuItem value={"Bogor"}>Bogor</MenuItem>
