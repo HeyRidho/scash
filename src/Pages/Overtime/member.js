@@ -29,7 +29,7 @@ export const member = [
     },
     {
         label: 'Albert',
-        jemputan: 'Tidak'
+        jemputan: 'Timur'
     },
     {
         label: 'Citra',
