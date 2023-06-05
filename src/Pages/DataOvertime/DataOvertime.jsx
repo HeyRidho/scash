@@ -45,7 +45,7 @@ const Overtime = () => {
     return (
         <section id="overtime">
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
-                <Typography variant="h6" align="center" fontWeight="bold" mb={5}>
+                <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
                 Data Overtime HRGA
                 </Typography>
 
@@ -53,6 +53,7 @@ const Overtime = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                     slotProps={{ textField: { fullWidth: true } }}
+                    format="DD/MM/YYYY"
                     label="Pilih Tanggal"
                     value={dateValue}
                     onChange={(newValue) => setDateValue(newValue)}
