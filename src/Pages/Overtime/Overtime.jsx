@@ -70,17 +70,6 @@ const Overtime = () => {
             setOpen(false);
             setOpenBarFail(true);
         }
-        // setOpen(true);
-        // axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', { name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
-        // .then(res => {
-        //     setOpen(false);
-        //     setOpenBar(true);
-        //     console.log('Success : ',{ name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
-        // }).catch(err => {
-        //     setOpen(false);
-        //     setOpenBarFail(true);
-        //     console.log(err)
-        // })
     }
 
     function resetForm() {
@@ -96,7 +85,7 @@ const Overtime = () => {
                 <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA
                 <Typography variant="body2" >
-                Check data Overtime disini : <Link to="/dataovertime">Overtime</Link>
+                Check data Overtime disini <Link to="/dataovertime">Overtime</Link>
                 </Typography>
                 </Typography>
                 <Autocomplete
