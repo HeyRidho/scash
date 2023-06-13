@@ -1,6 +1,6 @@
 import { member } from "./member";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Overtime.css";
 import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
@@ -19,6 +19,8 @@ const Overtime = () => {
     const [open, setOpen] = useState(false);
     const [openBar, setOpenBar] = useState(false);
     const [openBarFail, setOpenBarFail] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -61,17 +63,25 @@ const Overtime = () => {
     const [dateValue, setDateValue] = useState(dayjs(fullDate));
 
     function sendData(e) {
-        setOpen(true);
-        axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', { name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
-        .then(res => {
-            setOpen(false);
-            setOpenBar(true);
-            console.log('Success : ',{ name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
-        }).catch(err => {
+
+        if(name && pickup && hour && job){
+            window.open(`http://wa.me/62895324443540?text=Nama%20%3A%${name.label}%0ALembur%20%3A%202%${hour}%0AJemputan%20%3A%20${pickup}%0ATanggal%20%3A%${dateValue.format('DD-MM-YYYY')}`);
+            window.open(`http://wa.me/62895324443540?text=Nama%20%3A%20${name.label}%0ALembur%20%3A%202%${hour}0Jam%0AJemputan%20%3A%20${pickup}%0ATanggal%20%3A%${dateValue.format('DD-MM-YYYY')}`);
+        } else{
             setOpen(false);
             setOpenBarFail(true);
-            console.log(err)
-        })
+        }
+        // setOpen(true);
+        // axios.post('https://gray-sleepy-fish.cyclic.app/api/overtime', { name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
+        // .then(res => {
+        //     setOpen(false);
+        //     setOpenBar(true);
+        //     console.log('Success : ',{ name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
+        // }).catch(err => {
+        //     setOpen(false);
+        //     setOpenBarFail(true);
+        //     console.log(err)
+        // })
     }
 
     function resetForm() {
