@@ -65,7 +65,6 @@ const Overtime = () => {
     function sendData(e) {
 
         if(name && pickup && hour && job){
-            window.open(`http://wa.me/62895324443540?text=Nama%20%3A%${name.label}%0ALembur%20%3A%202%${hour}%0AJemputan%20%3A%20${pickup}%0ATanggal%20%3A%${dateValue.format('DD-MM-YYYY')}`);
             window.open(`http://wa.me/62895324443540?text=Nama%20%3A%20${name.label}%0ALembur%20%3A%202%${hour}0Jam%0AJemputan%20%3A%20${pickup}%0ATanggal%20%3A%${dateValue.format('DD-MM-YYYY')}`);
         } else{
             setOpen(false);
