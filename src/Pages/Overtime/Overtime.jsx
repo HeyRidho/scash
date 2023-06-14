@@ -1,6 +1,7 @@
 import { member } from "./member";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./Overtime.css";
 import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
 import dayjs from 'dayjs';
@@ -18,8 +19,6 @@ const Overtime = () => {
     const [open, setOpen] = useState(false);
     const [openBar, setOpenBar] = useState(false);
     const [openBarFail, setOpenBarFail] = useState(false);
-
-    const navigate = useNavigate();
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -62,13 +61,17 @@ const Overtime = () => {
     const [dateValue, setDateValue] = useState(dayjs(fullDate));
 
     function sendData(e) {
-
-        if(name && pickup && hour && job){
-            window.open(`http://wa.me/62895324443540?text=Nama%20%3A%20${name.label}%0ALembur%20%3A%202%${hour}0Jam%0AJemputan%20%3A%20${pickup}%0ATanggal%20%3A%${dateValue.format('DD-MM-YYYY')}`);
-        } else{
+        setOpen(true);
+        axios.get(`https://script.google.com/macros/s/AKfycbw5ZhVqV3Z9W4VaqSPGA94h3UAwGj_xF_wZiNqSCTFelK4jcBc7u9KjBui5-UL1gD9T/exec?name=${name.label}&hour=${hour}&job=${job}&date=${dateValue.format('DD-MM-YYYY')}&pickup=${pickup}`)
+        .then(res => {
+            setOpen(false);
+            setOpenBar(true);
+            console.log('Success : ',{ name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
+        }).catch(err => {
             setOpen(false);
             setOpenBarFail(true);
-        }
+            console.log(err)
+        })
     }
 
     function resetForm() {
@@ -84,7 +87,7 @@ const Overtime = () => {
                 <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA
                 <Typography variant="body2" >
-                Check data Overtime disini <Link to="/dataovertime">Overtime</Link>
+                Check data Overtime disini : <Link to="/dataovertime">Overtime</Link>
                 </Typography>
                 </Typography>
                 <Autocomplete
