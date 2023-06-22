@@ -5,7 +5,6 @@ import axios from "axios";
 import "./Overtime.css";
 import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { Send } from '@mui/icons-material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -62,16 +61,20 @@ const Overtime = () => {
 
     function sendData(e) {
         setOpen(true);
-        axios.get(`https://script.google.com/macros/s/AKfycbw5ZhVqV3Z9W4VaqSPGA94h3UAwGj_xF_wZiNqSCTFelK4jcBc7u9KjBui5-UL1gD9T/exec?name=${name.label}&hour=${hour}&job=${job}&date=${dateValue.format('DD-MM-YYYY')}&pickup=${pickup}`)
-        .then(res => {
-            setOpen(false);
-            setOpenBar(true);
-            console.log('Success : ',{ name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
-        }).catch(err => {
+        if(name && dateValue && pickup && job) {
+            axios.post(`https://hr-development-1f9af-default-rtdb.firebaseio.com/dailyovertime.json?auth=DoXyCDrEkmJzPn5RuGZu74QdqyJuhO1NzC2bAgWu`, { name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
+            .then(res => {
+                setOpen(false);
+                setOpenBar(true);
+            }).catch(err => {
+                setOpen(false);
+                setOpenBarFail(true);
+                console.log(err)
+            })
+        } else {
             setOpen(false);
             setOpenBarFail(true);
-            console.log(err)
-        })
+        }
     }
 
     function resetForm() {
@@ -172,12 +175,12 @@ const Overtime = () => {
                 />
 
                 <Stack direction="row" spacing={1}>
-                    <Button variant="outlined"  fullWidth style={{height: 50}} onClick={(e) => resetForm()}>
+                    <Button  fullWidth style={{height: 50}} onClick={(e) => resetForm()}>
                         RESET
                     </Button>
-                    <Button variant="contained" endIcon={<Send />} fullWidth onClick={(e) => sendData()} style={{height: 50}}>
+                        <Button variant="outlined" fullWidth onClick={(e) => sendData()} style={{height: 50}}>
                         KIRIM
-                    </Button>
+                        </Button>
                 </Stack>
                 <div>
                 <Backdrop
