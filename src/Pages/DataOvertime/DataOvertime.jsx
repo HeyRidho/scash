@@ -33,10 +33,20 @@ const Overtime = () => {
     }, [dateValue])
 
     function getOvertime(e) {
-        axios.get('https://gray-sleepy-fish.cyclic.app/api/overtime')
+        axios.get('https://hr-development-1f9af-default-rtdb.firebaseio.com/dailyovertime.json?auth=DoXyCDrEkmJzPn5RuGZu74QdqyJuhO1NzC2bAgWu')
         .then(res => {
             setOpen(false);
-            setDataOvertime(res.data);
+            let dataOt = [];
+            Object.values(res.data).map((item) => {
+                const date1 = e.format('DD-MM-YYYY')
+                const date2 = item.date;
+                if(date1 === date2) {
+                    dataOt.push(item)
+                }
+                return console.log('pushed')
+            })
+            setDataOvertime(dataOt)
+
         }).catch(err => {
             setOpen(false);
         })
@@ -63,6 +73,7 @@ const Overtime = () => {
 
                 <table style={{width: "100%", fontSize: 12, border: "1px solid gray", borderCollapse: "collapse", color: "black"}}>
                     <tr key="head">
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>No.</strong></td>
                         <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Nama</strong></td>
                         <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Jam</strong></td>
                         <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Pekerjaan</strong></td>
@@ -70,21 +81,16 @@ const Overtime = () => {
                         <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Tanggal</strong></td>
                     </tr>
                 {
-                    dataOvertime && dataOvertime.map((item) => {
-                      const date1 = new Date(dateValue.format('DD/MM/YYYY')).toLocaleDateString();
-                      const date2 = new Date(item.date).toLocaleDateString();
-                      if(date1 === date2) {
+                    dataOvertime && dataOvertime.map((item, index) => {
                         return(
                             <tr key={item._id} style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{index + 1}</td>
                                 <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}>{item.name}</td>
                                 <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{item.hour}</td>
                                 <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}>{item.job}</td>
                                 <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{item.pickup}</td>
-                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{new Date(item.date).toLocaleDateString()}</td>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{item.date}</td>
                         </tr>)
-                      }
-
-                      return console.log('ok')
                     })
                 }
                 </table>
