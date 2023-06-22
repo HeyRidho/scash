@@ -1,9 +1,7 @@
-import { member } from "./member";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Overtime.css";
-import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
+import { Stack, Typography, Backdrop, CircularProgress } from '@mui/material';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -11,38 +9,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 const Overtime = () => {
-    const [name, setName] = useState('');
-    const [hour, setHour] = useState('');
-    const [pickup, setPickup] = useState('Tidak');
-    const [job, setJob] = useState('');
-    const [open, setOpen] = useState(false);
-    const [openBar, setOpenBar] = useState(false);
-    const [openBarFail, setOpenBarFail] = useState(false);
+    const [dataOvertime, setDataOvertime] = useState(null);
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-        return;
-        }
-
-        setOpenBar(false);
-    };
-
-    const handleCloseFail = (event, reason) => {
-        if (reason === 'clickaway') {
-        return;
-        }
-
-        setOpenBarFail(false);
-    };
-    
-    const handleOT = (event) => {
-        setHour(event.target.value);
-    };
-    
-    const handlePickup = (event) => {
-        setPickup(event.target.value);
-    };
-    
     let dated = new Date()
     let day = dated.getDate();
     let month = dated.getMonth() + 1;
@@ -58,150 +26,81 @@ const Overtime = () => {
     
     let fullDate = `${year}-${month}-${day}`;
     const [dateValue, setDateValue] = useState(dayjs(fullDate));
+    const [open, setOpen] = useState(true);
 
-    function sendData(e) {
-        setOpen(true);
-        if(name && dateValue && pickup && job) {
-            axios.post(`https://hr-development-1f9af-default-rtdb.firebaseio.com/dailyovertime.json?auth=DoXyCDrEkmJzPn5RuGZu74QdqyJuhO1NzC2bAgWu`, { name: name.label, hour, job, date: dateValue.format('DD-MM-YYYY'), pickup })
-            .then(res => {
-                setOpen(false);
-                setOpenBar(true);
-            }).catch(err => {
-                setOpen(false);
-                setOpenBarFail(true);
-                console.log(err)
-            })
-        } else {
+    useEffect(() => {
+        getOvertime(dateValue)
+    }, [dateValue])
+
+    function getOvertime(e) {
+        axios.get('https://hr-development-1f9af-default-rtdb.firebaseio.com/dailyovertime.json?auth=DoXyCDrEkmJzPn5RuGZu74QdqyJuhO1NzC2bAgWu')
+        .then(res => {
             setOpen(false);
-            setOpenBarFail(true);
-        }
-    }
+            let dataOt = [];
+            Object.values(res.data).map((item) => {
+                const date1 = e.format('DD-MM-YYYY')
+                const date2 = item.date;
+                if(date1 === date2) {
+                    dataOt.push(item)
+                }
+                return console.log('pushed')
+            })
+            setDataOvertime(dataOt)
 
-    function resetForm() {
-        setJob('');
-        setHour('');
-        setPickup('');
+        }).catch(err => {
+            setOpen(false);
+        })
     }
-
 
     return (
         <section id="overtime">
             <div className="overtime-form" style={{width: "100%", maxWidth: 640, margin: "auto"}}>
                 <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
-                Form Overtime HRGA
-                <Typography variant="body2" >
-                Check data Overtime disini : <a href="https://docs.google.com/spreadsheets/d/1ipLcpr2Ywemz820fYG33qbrgqfUYgINc7EWVXt8qjVg/edit?usp=sharing" target="_blank"></a></Link>
+                Data Overtime HRGA
                 </Typography>
-                </Typography>
-                <Autocomplete
-                fullWidth
-                style={{marginBottom: 20}}
-                disablePortal
-                id="combo-box"
-                options={member}
-                onChange={(event, value) => {
-                    setName(value);
-                    member.filter(member => member === value ? setPickup(member.jemputan) : console.log(value));
-                }}
-                renderInput={(params) => <TextField {...params} label="Pilih Nama" />}
-                />
 
                 <Stack>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
                     slotProps={{ textField: { fullWidth: true } }}
                     format="DD/MM/YYYY"
-                    label="Tanggal"
+                    label="Pilih Tanggal"
                     value={dateValue}
                     onChange={(newValue) => setDateValue(newValue)}
                     />
                 </LocalizationProvider><br />
                 </Stack>
 
-                <Stack direction="row" spacing={1}>
-                <FormControl fullWidth>
-                    <InputLabel id="simple-select-label">Overtime</InputLabel>
-                    <Select
-                    labelId="simple-select-label"
-                    id="simple-select"
-                    value={hour}
-                    label="Overtime"
-                    onChange={handleOT}
-                    >
-                    <MenuItem value={0}>Teiji</MenuItem>
-                    <MenuItem value={1}>1 Jam</MenuItem>
-                    <MenuItem value={2}>2 Jam</MenuItem>
-                    <MenuItem value={3}>3 Jam</MenuItem>
-                    <MenuItem value={4}>4 Jam</MenuItem>
-                    <MenuItem value={5}>5 Jam</MenuItem>
-                    <MenuItem value={6}>6 Jam</MenuItem>
-                    <MenuItem value={7}>7 Jam</MenuItem>
-                    <MenuItem value={8}>8 Jam</MenuItem>
-                    <MenuItem value={9}>9 Jam</MenuItem>
-                    <MenuItem value={10}>10 Jam</MenuItem>
-                    <MenuItem value={11}>11 Jam</MenuItem>
-                    <MenuItem value={12}>12 Jam</MenuItem>
-                    </Select>
-                </FormControl>
-                
-                <FormControl fullWidth>
-                    <InputLabel id="simple-select-label">Jemputan</InputLabel>
-                    <Select
-                    labelId="simple-select-label"
-                    id="simple-select"
-                    value={pickup}
-                    label="Jemputan"
-                    onChange={handlePickup}
-                    >
-                    <MenuItem value={"Tidak"}>Tidak</MenuItem>
-                    <MenuItem value={"Barat"}>Barat</MenuItem>
-                    <MenuItem value={"Cawang"}>Cawang</MenuItem>
-                    <MenuItem value={"Timur"}>Timur</MenuItem>
-                    <MenuItem value={"Bogor"}>Bogor</MenuItem>
-                    <MenuItem value={"Cikarang"}>Cikarang</MenuItem>
-                    </Select>
-                </FormControl>
-                </Stack><br />
+                <table style={{width: "100%", fontSize: 12, border: "1px solid gray", borderCollapse: "collapse", color: "black"}}>
+                    <tr key="head">
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>No.</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Nama</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Jam</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Pekerjaan</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Jemputan</strong></td>
+                        <td style={{width: "fit-content",padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}  align="center"><strong>Tanggal</strong></td>
+                    </tr>
+                {
+                    dataOvertime && dataOvertime.map((item, index) => {
+                        return(
+                            <tr key={item._id} style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{index + 1}</td>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}>{item.name}</td>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{item.hour}</td>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}}>{item.job}</td>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{item.pickup}</td>
+                                <td style={{padding: 3, border: "1px solid gray", borderCollapse: "collapse"}} align="center">{item.date}</td>
+                        </tr>)
+                    })
+                }
+                </table>
 
-                <TextField
-                fullWidth
-                style={{marginBottom: 30}}
-                id="outlined-multiline-static"
-                label="Pekerjaan"
-                multiline
-                rows={4}
-                value={job}
-                onChange={(e) => setJob(e.target.value)}
-                />
-
-                <Stack direction="row" spacing={1}>
-                    <Button  fullWidth style={{height: 50}} onClick={(e) => resetForm()}>
-                        RESET
-                    </Button>
-                        <Button variant="outlined" fullWidth onClick={(e) => sendData()} style={{height: 50}}>
-                        KIRIM
-                        </Button>
-                </Stack>
-                <div>
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
                 >
                     <CircularProgress color="inherit" />
                 </Backdrop>
-
-                <Snackbar open={openBar} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                    Terimakasih, Data sudah terkirim
-                    </Alert>
-                </Snackbar>
-                
-                <Snackbar open={openBarFail} autoHideDuration={6000} onClose={handleCloseFail}>
-                    <Alert onClose={handleCloseFail} severity="error" sx={{ width: '100%' }}>
-                    Harap lengkapi data terlebih dahulu
-                    </Alert>
-                </Snackbar>
-                </div>
             </div>
         </section>
     )
