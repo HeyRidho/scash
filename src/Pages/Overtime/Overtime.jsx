@@ -90,7 +90,7 @@ const Overtime = () => {
                 <Typography variant="h5" align="center" fontWeight="bold" mb={5}>
                 Form Overtime HRGA
                 <Typography variant="body2" >
-                Check data Overtime-mu disini : <Link to="/dataovertime">Overtime</Link>
+                Check data Overtime disini : <a href="https://docs.google.com/spreadsheets/d/1ipLcpr2Ywemz820fYG33qbrgqfUYgINc7EWVXt8qjVg/edit?usp=sharing" target="_blank"></a></Link>
                 </Typography>
                 </Typography>
                 <Autocomplete
@@ -154,7 +154,7 @@ const Overtime = () => {
                     onChange={handlePickup}
                     >
                     <MenuItem value={"Tidak"}>Tidak</MenuItem>
-                    <MenuItem value={"Bekasi Barat"}>Bekasi Barat</MenuItem>
+                    <MenuItem value={"Barat"}>Barat</MenuItem>
                     <MenuItem value={"Cawang"}>Cawang</MenuItem>
                     <MenuItem value={"Timur"}>Timur</MenuItem>
                     <MenuItem value={"Bogor"}>Bogor</MenuItem>
