@@ -5,7 +5,6 @@ import axios from "axios";
 import "./Overtime.css";
 import { Backdrop, Snackbar, Alert, CircularProgress, TextField, Autocomplete, InputLabel, MenuItem, FormControl, Select, Stack, Button, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { Send } from '@mui/icons-material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -191,13 +190,13 @@ const Overtime = () => {
                     <CircularProgress color="inherit" />
                 </Backdrop>
 
-                <Snackbar open={openBar} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={openBar} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     Terimakasih, Data sudah terkirim
                     </Alert>
                 </Snackbar>
                 
-                <Snackbar open={openBarFail} autoHideDuration={6000} onClose={handleCloseFail}>
+                <Snackbar anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={openBarFail} autoHideDuration={6000} onClose={handleCloseFail}>
                     <Alert onClose={handleCloseFail} severity="error" sx={{ width: '100%' }}>
                     Harap lengkapi data terlebih dahulu
                     </Alert>
