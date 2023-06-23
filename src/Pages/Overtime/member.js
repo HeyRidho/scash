@@ -40,7 +40,7 @@ export const member = [
         jemputan: 'Cikarang'
     },
     {
-        label: 'Dhina',
+        label: 'Dina',
         jemputan: 'Tidak'
     },
     {
